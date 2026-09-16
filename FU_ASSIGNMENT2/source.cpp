@@ -11,10 +11,22 @@ struct STUDENT_DATA
 {
     string firstName;
     string lastName;
+
+#ifdef PRE_RELEASE
+    string email;
+#endif
 };
 
 int main()
 {
+#ifdef PRE_RELEASE
+    cout << "Running Pre-Release version" << endl;
+	ifstream inputFile("StudentData_Emails.txt");
+#else
+    cout << "Running Standard version" << endl;
+    ifstream inputFile("StudentData.txt");
+#endif
+
     // Open the StudentData.txt file
     ifstream inputFile("StudentData.txt");
 
@@ -51,6 +63,10 @@ int main()
         student.firstName = firstName;
         student.lastName = lastName;
 
+     #ifdef PRE_RELEASE
+        getline(dataStream, student.email);
+     #endif
+
         // Add the student to the vector
         students.push_back(student);
     }
@@ -59,7 +75,13 @@ int main()
 
     for (const STUDENT_DATA& student : students)
     {
-        cout << student.firstName << " " << student.lastName << endl;
+        cout << student.firstName << " " << student.lastName;
+
+#ifdef PRE_RELEASE
+        cout << " " << "," << student.email;
+#endif
+            
+        cout<< endl;
     }
 
 #endif
