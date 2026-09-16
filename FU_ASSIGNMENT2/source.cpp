@@ -4,6 +4,8 @@
 #include <vector>
 #include <sstream>
 
+#define PRE_RELEASE
+
 using namespace std;
 
 // Create a structure to store student information
@@ -20,15 +22,12 @@ struct STUDENT_DATA
 int main()
 {
 #ifdef PRE_RELEASE
-    cout << "Running Pre-Release version" << endl;
+    cout << "Running Pre-Release version" << endl << endl;
 	ifstream inputFile("StudentData_Emails.txt");
 #else
-    cout << "Running Standard version" << endl;
+    cout << "Running Standard version" << endl << endl;
     ifstream inputFile("StudentData.txt");
 #endif
-
-    // Open the StudentData.txt file
-    ifstream inputFile("StudentData.txt");
 
     // Check if the file opened successfully
     if (!inputFile)
@@ -64,7 +63,7 @@ int main()
         student.lastName = lastName;
 
      #ifdef PRE_RELEASE
-        getline(dataStream, student.email);
+        getline(studentStream, student.email);
      #endif
 
         // Add the student to the vector
