@@ -55,11 +55,19 @@ int main()
         students.push_back(student);
     }
 
+#ifdef _DEBUG
+
+    for (const STUDENT_DATA& student : students)
+    {
+        cout << student.firstName << " " << student.lastName << endl;
+    }
+
+#endif
+
     // Close the file
     inputFile.close();
 
-    cout << "Students loaded successfully." << endl;
-    cout << "Number of students: " << students.size() << endl;
+
 
     return 0;
 }
