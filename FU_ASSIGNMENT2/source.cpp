@@ -4,6 +4,8 @@
 #include <vector>
 #include <sstream>
 
+// Define the PRE_RELEASE compiler directive to enable pre-release functionality.
+// Remove or comment out this line when running the standard version.
 #define PRE_RELEASE
 
 using namespace std;
@@ -15,7 +17,10 @@ struct STUDENT_DATA
     string lastName;
 
 #ifdef PRE_RELEASE
+
+    // Email information is only included in the Pre-Release version.
     string email;
+
 #endif
 };
 
@@ -23,9 +28,14 @@ int main()
 {
 #ifdef PRE_RELEASE
     cout << "Running Pre-Release version" << endl << endl;
+
+    // Open the file containing student names and email addresses.
 	ifstream inputFile("StudentData_Emails.txt");
 #else
+
     cout << "Running Standard version" << endl << endl;
+
+    // Open the file containing student names.
     ifstream inputFile("StudentData.txt");
 #endif
 
@@ -63,6 +73,9 @@ int main()
         student.lastName = lastName;
 
      #ifdef PRE_RELEASE
+
+        // Read and store the student's email address.
+        // This functionality is only available in the Pre-Release version.
         getline(studentStream, student.email);
      #endif
 
@@ -70,12 +83,15 @@ int main()
         students.push_back(student);
     }
 
+ // Display student information when the program is compiled in Debug mode.
 #ifdef _DEBUG
 
     for (const STUDENT_DATA& student : students)
     {
         cout << student.firstName << " " << student.lastName;
 
+
+ // Display the email address in the Pre-Release version.
 #ifdef PRE_RELEASE
         cout << " " << "," << student.email;
 #endif
@@ -85,7 +101,7 @@ int main()
 
 #endif
 
-    // Close the file
+    // Close the file after all student records have been processed.
     inputFile.close();
 
 
